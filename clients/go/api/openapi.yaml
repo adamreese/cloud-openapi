@@ -1,0 +1,3438 @@
+openapi: 3.0.1
+info:
+  title: Fermyon Cloud API
+  version: "1.0"
+servers:
+- url: /
+security:
+- Bearer: []
+paths:
+  /api/accounts/{id}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - accounts
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AccountDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AccountDetails'
+          description: Success
+      tags:
+      - accounts
+    patch:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PatchAccountDetailsCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchAccountDetailsCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PatchAccountDetailsCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PatchAccountDetailsCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - accounts
+  /api/apps:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: searchText
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: pageIndex
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          default: Name
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: IsSortedAscending
+        required: false
+        schema:
+          default: true
+          type: boolean
+        style: form
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AppItemPage'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppItemPage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AppItemPage'
+          description: Success
+      tags:
+      - apps
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateAppCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateAppCommand'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                format: uuid
+                type: string
+            application/json:
+              schema:
+                format: uuid
+                type: string
+            text/json:
+              schema:
+                format: uuid
+                type: string
+          description: Success
+      tags:
+      - apps
+  /api/apps/{id}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - apps
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AppItem'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppItem'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AppItem'
+          description: Success
+      tags:
+      - apps
+    patch:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PatchAppCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchAppCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PatchAppCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PatchAppCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - apps
+    put:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - apps
+  /api/apps/{id}/request-count:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AppRequestCount'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppRequestCount'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AppRequestCount'
+          description: Success
+      tags:
+      - apps
+  /api/auth-tokens:
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateTokenCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTokenCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateTokenCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateTokenCommand'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TokenInfo'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenInfo'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TokenInfo'
+          description: Success
+      tags:
+      - auth-tokens
+  /api/auth-tokens/refresh:
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenCommand'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TokenInfo'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenInfo'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TokenInfo'
+          description: Success
+      tags:
+      - auth-tokens
+  /api/channels:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: searchText
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: pageIndex
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          default: Name
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: IsSortedAscending
+        required: false
+        schema:
+          default: true
+          type: boolean
+        style: form
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChannelItemPage'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelItemPage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChannelItemPage'
+          description: Success
+      tags:
+      - channels
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateChannelCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChannelCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateChannelCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateChannelCommand'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                format: uuid
+                type: string
+            application/json:
+              schema:
+                format: uuid
+                type: string
+            text/json:
+              schema:
+                format: uuid
+                type: string
+          description: Success
+      tags:
+      - channels
+  /api/channels/{id}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - channels
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChannelItem'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelItem'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChannelItem'
+          description: Success
+      tags:
+      - channels
+    patch:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PatchChannelCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchChannelCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PatchChannelCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PatchChannelCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - channels
+    put:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateChannelCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChannelCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChannelCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateChannelCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - channels
+  /api/channels/{channelId}/desired-status:
+    put:
+      parameters:
+      - explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateDesiredStatusCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDesiredStatusCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDesiredStatusCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateDesiredStatusCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - channels
+  /api/channels/{id}/logs:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: max
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/GetChannelLogsVm'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChannelLogsVm'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GetChannelLogsVm'
+          description: Success
+      tags:
+      - channels
+  /api/channels/{id}/healthz:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResult'
+          description: Success
+      tags:
+      - channels
+  /api/custom-domains/{name}:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: domainName
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DomainItem'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainItem'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DomainItem'
+          description: Success
+      tags:
+      - custom-domains
+  /api/device-codes:
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateDeviceCodeCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeviceCodeCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeviceCodeCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateDeviceCodeCommand'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeviceCodeItem'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceCodeItem'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeviceCodeItem'
+          description: Success
+      tags:
+      - device-codes
+  /api/device-codes/{userCode}:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: userCode
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeviceCodeDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceCodeDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeviceCodeDetails'
+          description: Success
+      tags:
+      - device-codes
+  /api/device-codes/activate:
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ActivateDeviceCodeCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateDeviceCodeCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ActivateDeviceCodeCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ActivateDeviceCodeCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - device-codes
+  /api/key-value-pairs:
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyValuePairCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyValuePairCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyValuePairCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyValuePairCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - key-value-pairs
+  /api/oci:
+    get:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - oci
+  /api/oci/{name}/manifests/{reference}:
+    head:
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: reference
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - oci
+    put:
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: reference
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - oci
+  /api/oci/{name}/blobs/uploads:
+    post:
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - oci
+  /api/oci/{name}/blobs/uploads/{digest}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: digest
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - oci
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: digest
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - oci
+    patch:
+      parameters:
+      - explode: false
+        in: path
+        name: digest
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - oci
+    put:
+      parameters:
+      - explode: false
+        in: path
+        name: digest
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - oci
+  /api/payments/setup-checkout:
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PaymentIntegrationUrl'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntegrationUrl'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntegrationUrl'
+          description: Success
+      tags:
+      - payments
+  /api/payments/customer-portal:
+    get:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PaymentIntegrationUrl'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntegrationUrl'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntegrationUrl'
+          description: Success
+      tags:
+      - payments
+  /api/payments/plans:
+    get:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Plan'
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Plan'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Plan'
+                type: array
+          description: Success
+      tags:
+      - payments
+  /api/personal-access-tokens:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: searchText
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: pageIndex
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          default: CreatedAt
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: isSortedAscending
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PersonalAccessTokenItemPage'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalAccessTokenItemPage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PersonalAccessTokenItemPage'
+          description: Success
+      tags:
+      - personal-access-tokens
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreatePersonalAccessTokenCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePersonalAccessTokenCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreatePersonalAccessTokenCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreatePersonalAccessTokenCommand'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PersonalAccessTokenValue'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalAccessTokenValue'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PersonalAccessTokenValue'
+          description: Success
+      tags:
+      - personal-access-tokens
+  /api/personal-access-tokens/{id}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - personal-access-tokens
+  /api/registry/_i:
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - registry
+  /api/registry/_i/{bindleName}:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: bindleName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - registry
+    post:
+      parameters:
+      - explode: false
+        in: path
+        name: bindleName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+      tags:
+      - registry
+  /api/revisions:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: pageIndex
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: searchText
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RevisionItemPage'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevisionItemPage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RevisionItemPage'
+          description: Success
+      tags:
+      - revisions
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RegisterRevisionCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRevisionCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRevisionCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RegisterRevisionCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - revisions
+  /api/sql-databases/create:
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateSqlDatabaseCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSqlDatabaseCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateSqlDatabaseCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateSqlDatabaseCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - sql-databases
+  /api/sql-databases/execute:
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ExecuteSqlStatementCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteSqlStatementCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteSqlStatementCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ExecuteSqlStatementCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - sql-databases
+  /api/sql-databases:
+    delete:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteSqlDatabaseCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSqlDatabaseCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSqlDatabaseCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteSqlDatabaseCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - sql-databases
+    get:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/GetSqlDatabasesQuery'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSqlDatabasesQuery'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GetSqlDatabasesQuery'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GetSqlDatabasesQuery'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DatabasesList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabasesList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DatabasesList'
+          description: Success
+      tags:
+      - sql-databases
+  /api/storages:
+    get:
+      parameters:
+      - explode: true
+        in: query
+        name: searchText
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: pageIndex
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: IsSortedAscending
+        required: false
+        schema:
+          default: true
+          type: boolean
+        style: form
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StringPage'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringPage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/StringPage'
+          description: Success
+      tags:
+      - storages
+  /api/support:
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateSupportTicketCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSupportTicketCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateSupportTicketCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateSupportTicketCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - support
+  /api/variable-pairs:
+    delete:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteVariablePairCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteVariablePairCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteVariablePairCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteVariablePairCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - variable-pairs
+    get:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/GetVariablesQuery'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetVariablesQuery'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GetVariablesQuery'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GetVariablesQuery'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/VariablesList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariablesList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VariablesList'
+          description: Success
+      tags:
+      - variable-pairs
+    post:
+      parameters:
+      - description: The requested API version
+        explode: false
+        in: header
+        name: Api-Version
+        required: false
+        schema:
+          default: "1.0"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateVariablePairCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVariablePairCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateVariablePairCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateVariablePairCommand'
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+      - variable-pairs
+components:
+  schemas:
+    AccountDetails:
+      additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        isMarketingEmailOn: true
+        plan:
+          cycleStartDate: 2000-01-23T04:56:07.000+00:00
+          cancelAt: 2000-01-23T04:56:07.000+00:00
+          accountType: null
+          cycleEndDate: 2000-01-23T04:56:07.000+00:00
+      properties:
+        plan:
+          $ref: '#/components/schemas/AccountPlanRecord'
+        isMarketingEmailOn:
+          type: boolean
+        createdAt:
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    AccountPlanRecord:
+      additionalProperties: false
+      example:
+        cycleStartDate: 2000-01-23T04:56:07.000+00:00
+        cancelAt: 2000-01-23T04:56:07.000+00:00
+        accountType: null
+        cycleEndDate: 2000-01-23T04:56:07.000+00:00
+      properties:
+        accountType:
+          $ref: '#/components/schemas/AccountPlanType'
+        cancelAt:
+          format: date-time
+          nullable: true
+          type: string
+        cycleStartDate:
+          format: date-time
+          nullable: true
+          type: string
+        cycleEndDate:
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    AccountPlanType:
+      enum:
+      - Free
+      - Growth
+      - Enterprise
+      type: string
+    AccountProvider:
+      enum:
+      - GitHub
+      - DeviceFlow
+      type: string
+    ActivateDeviceCodeCommand:
+      additionalProperties: false
+      example:
+        userCode: userCode
+      properties:
+        userCode:
+          minLength: 1
+          type: string
+      required:
+      - userCode
+      type: object
+    ApiHealthStatus:
+      enum:
+      - Healthy
+      - Unhealthy
+      - Degraded
+      type: string
+    AppChannelListItem:
+      additionalProperties: false
+      example:
+        healthStatus: null
+        created: 2000-01-23T04:56:07.000+00:00
+        domain: domain
+        name: name
+        activeRevisionNumber: activeRevisionNumber
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          minLength: 1
+          type: string
+        activeRevisionNumber:
+          type: string
+        domain:
+          type: string
+        created:
+          format: date-time
+          type: string
+        healthStatus:
+          $ref: '#/components/schemas/ApiHealthStatus'
+      required:
+      - created
+      - id
+      - name
+      type: object
+    AppDomainItem:
+      additionalProperties: false
+      example:
+        name: name
+        validationStatus: null
+      properties:
+        name:
+          minLength: 1
+          type: string
+        validationStatus:
+          $ref: '#/components/schemas/DomainValidationStatus'
+      required:
+      - name
+      - validationStatus
+      type: object
+    AppItem:
+      additionalProperties: false
+      example:
+        channels:
+        - healthStatus: null
+          created: 2000-01-23T04:56:07.000+00:00
+          domain: domain
+          name: name
+          activeRevisionNumber: activeRevisionNumber
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - healthStatus: null
+          created: 2000-01-23T04:56:07.000+00:00
+          domain: domain
+          name: name
+          activeRevisionNumber: activeRevisionNumber
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        domain:
+          name: name
+          validationStatus: null
+        name: name
+        description: description
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        storageId: storageId
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          minLength: 1
+          type: string
+        storageId:
+          minLength: 1
+          type: string
+        description:
+          type: string
+        channels:
+          items:
+            $ref: '#/components/schemas/AppChannelListItem'
+          type: array
+        domain:
+          $ref: '#/components/schemas/AppDomainItem'
+      required:
+      - channels
+      - id
+      - name
+      - storageId
+      type: object
+    AppItemPage:
+      additionalProperties: false
+      example:
+        totalItems: 0
+        pageIndex: 6
+        isLastPage: true
+        pageSize: 1
+        items:
+        - channels:
+          - healthStatus: null
+            created: 2000-01-23T04:56:07.000+00:00
+            domain: domain
+            name: name
+            activeRevisionNumber: activeRevisionNumber
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - healthStatus: null
+            created: 2000-01-23T04:56:07.000+00:00
+            domain: domain
+            name: name
+            activeRevisionNumber: activeRevisionNumber
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          domain:
+            name: name
+            validationStatus: null
+          name: name
+          description: description
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          storageId: storageId
+        - channels:
+          - healthStatus: null
+            created: 2000-01-23T04:56:07.000+00:00
+            domain: domain
+            name: name
+            activeRevisionNumber: activeRevisionNumber
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - healthStatus: null
+            created: 2000-01-23T04:56:07.000+00:00
+            domain: domain
+            name: name
+            activeRevisionNumber: activeRevisionNumber
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          domain:
+            name: name
+            validationStatus: null
+          name: name
+          description: description
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          storageId: storageId
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/AppItem'
+          type: array
+        totalItems:
+          format: int32
+          type: integer
+        pageIndex:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        isLastPage:
+          readOnly: true
+          type: boolean
+      required:
+      - isLastPage
+      - items
+      - pageIndex
+      - pageSize
+      - totalItems
+      type: object
+    AppRequestCount:
+      additionalProperties: false
+      example:
+        total: 5
+        start: 0
+        end: 6
+        interval: 1
+        averagePerSecond: 5.637376656633329
+        points:
+        - value: 7
+          timestamp: 2
+        - value: 7
+          timestamp: 2
+      properties:
+        start:
+          format: int64
+          type: integer
+        end:
+          format: int64
+          type: integer
+        interval:
+          format: int32
+          type: integer
+        total:
+          format: int64
+          type: integer
+        averagePerSecond:
+          format: double
+          type: number
+        points:
+          items:
+            $ref: '#/components/schemas/AppRequestPoint'
+          type: array
+      required:
+      - averagePerSecond
+      - end
+      - interval
+      - points
+      - start
+      - total
+      type: object
+    AppRequestPoint:
+      additionalProperties: false
+      example:
+        value: 7
+        timestamp: 2
+      properties:
+        timestamp:
+          format: int64
+          type: integer
+        value:
+          format: int64
+          type: integer
+      type: object
+    AppSummaryDto:
+      additionalProperties: false
+      example:
+        channels:
+        - healthStatus: null
+          created: 2000-01-23T04:56:07.000+00:00
+          domain: domain
+          name: name
+          activeRevisionNumber: activeRevisionNumber
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - healthStatus: null
+          created: 2000-01-23T04:56:07.000+00:00
+          domain: domain
+          name: name
+          activeRevisionNumber: activeRevisionNumber
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        storageId: storageId
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          minLength: 1
+          type: string
+        storageId:
+          minLength: 1
+          type: string
+        channels:
+          items:
+            $ref: '#/components/schemas/AppChannelListItem'
+          type: array
+      required:
+      - channels
+      - id
+      - name
+      - storageId
+      type: object
+    BooleanField:
+      additionalProperties: false
+      example:
+        value: true
+      properties:
+        value:
+          type: boolean
+      type: object
+    ChannelItem:
+      additionalProperties: false
+      example:
+        appSummary:
+          channels:
+          - healthStatus: null
+            created: 2000-01-23T04:56:07.000+00:00
+            domain: domain
+            name: name
+            activeRevisionNumber: activeRevisionNumber
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - healthStatus: null
+            created: 2000-01-23T04:56:07.000+00:00
+            domain: domain
+            name: name
+            activeRevisionNumber: activeRevisionNumber
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          storageId: storageId
+        environmentVariables:
+        - value: value
+          channelId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          key: key
+        - value: value
+          channelId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          key: key
+        appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        domain: domain
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        revisionSelectionStrategy: null
+        activeRevision:
+          components:
+          - route: route
+            name: name
+            channel: channel
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            source: source
+            type: type
+          - route: route
+            name: name
+            channel: channel
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            source: source
+            type: type
+          revisionNumber: revisionNumber
+          appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: type
+        rangeRule: rangeRule
+        lastPublishAt: 2000-01-23T04:56:07.000+00:00
+        desiredStatus: desiredStatus
+      properties:
+        id:
+          format: uuid
+          type: string
+        appId:
+          format: uuid
+          type: string
+        name:
+          minLength: 1
+          type: string
+        domain:
+          minLength: 1
+          type: string
+        revisionSelectionStrategy:
+          $ref: '#/components/schemas/ChannelRevisionSelectionStrategy'
+        desiredStatus:
+          minLength: 1
+          type: string
+        activeRevision:
+          $ref: '#/components/schemas/RevisionItem'
+        lastPublishAt:
+          format: date-time
+          nullable: true
+          type: string
+        rangeRule:
+          nullable: true
+          type: string
+        appSummary:
+          $ref: '#/components/schemas/AppSummaryDto'
+        environmentVariables:
+          items:
+            $ref: '#/components/schemas/EnvironmentVariableItem'
+          type: array
+      required:
+      - appId
+      - desiredStatus
+      - domain
+      - environmentVariables
+      - id
+      - name
+      - revisionSelectionStrategy
+      type: object
+    ChannelItemPage:
+      additionalProperties: false
+      example:
+        totalItems: 0
+        pageIndex: 6
+        isLastPage: true
+        pageSize: 1
+        items:
+        - appSummary:
+            channels:
+            - healthStatus: null
+              created: 2000-01-23T04:56:07.000+00:00
+              domain: domain
+              name: name
+              activeRevisionNumber: activeRevisionNumber
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - healthStatus: null
+              created: 2000-01-23T04:56:07.000+00:00
+              domain: domain
+              name: name
+              activeRevisionNumber: activeRevisionNumber
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            storageId: storageId
+          environmentVariables:
+          - value: value
+            channelId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            key: key
+          - value: value
+            channelId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            key: key
+          appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          domain: domain
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          revisionSelectionStrategy: null
+          activeRevision:
+            components:
+            - route: route
+              name: name
+              channel: channel
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              source: source
+              type: type
+            - route: route
+              name: name
+              channel: channel
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              source: source
+              type: type
+            revisionNumber: revisionNumber
+            appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            type: type
+          rangeRule: rangeRule
+          lastPublishAt: 2000-01-23T04:56:07.000+00:00
+          desiredStatus: desiredStatus
+        - appSummary:
+            channels:
+            - healthStatus: null
+              created: 2000-01-23T04:56:07.000+00:00
+              domain: domain
+              name: name
+              activeRevisionNumber: activeRevisionNumber
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - healthStatus: null
+              created: 2000-01-23T04:56:07.000+00:00
+              domain: domain
+              name: name
+              activeRevisionNumber: activeRevisionNumber
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            storageId: storageId
+          environmentVariables:
+          - value: value
+            channelId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            key: key
+          - value: value
+            channelId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            key: key
+          appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          domain: domain
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          revisionSelectionStrategy: null
+          activeRevision:
+            components:
+            - route: route
+              name: name
+              channel: channel
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              source: source
+              type: type
+            - route: route
+              name: name
+              channel: channel
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              source: source
+              type: type
+            revisionNumber: revisionNumber
+            appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            type: type
+          rangeRule: rangeRule
+          lastPublishAt: 2000-01-23T04:56:07.000+00:00
+          desiredStatus: desiredStatus
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ChannelItem'
+          type: array
+        totalItems:
+          format: int32
+          type: integer
+        pageIndex:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        isLastPage:
+          readOnly: true
+          type: boolean
+      required:
+      - isLastPage
+      - items
+      - pageIndex
+      - pageSize
+      - totalItems
+      type: object
+    ChannelRevisionSelectionStrategy:
+      enum:
+      - UseRangeRule
+      - UseSpecifiedRevision
+      type: string
+    ChannelRevisionSelectionStrategyField:
+      additionalProperties: false
+      example:
+        value: null
+      properties:
+        value:
+          $ref: '#/components/schemas/ChannelRevisionSelectionStrategy'
+      type: object
+    CreateAppCommand:
+      additionalProperties: false
+      example:
+        createDefaultDatabase: true
+        name: name
+        storageId: storageId
+      properties:
+        name:
+          minLength: 1
+          type: string
+        storageId:
+          minLength: 1
+          type: string
+        createDefaultDatabase:
+          type: boolean
+      required:
+      - name
+      - storageId
+      type: object
+    CreateChannelCommand:
+      additionalProperties: false
+      example:
+        appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        revisionSelectionStrategy: null
+        rangeRule: rangeRule
+        activeRevisionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        appId:
+          format: uuid
+          type: string
+        name:
+          minLength: 1
+          type: string
+        revisionSelectionStrategy:
+          $ref: '#/components/schemas/ChannelRevisionSelectionStrategy'
+        rangeRule:
+          nullable: true
+          type: string
+        activeRevisionId:
+          format: uuid
+          nullable: true
+          type: string
+      required:
+      - appId
+      - name
+      - revisionSelectionStrategy
+      type: object
+    CreateDeviceCodeCommand:
+      additionalProperties: false
+      example:
+        clientId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        clientId:
+          format: uuid
+          type: string
+      required:
+      - clientId
+      type: object
+    CreateKeyValuePairCommand:
+      additionalProperties: false
+      example:
+        appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        storeName: storeName
+        value: value
+        key: key
+      properties:
+        appId:
+          format: uuid
+          type: string
+        storeName:
+          minLength: 1
+          type: string
+        key:
+          minLength: 1
+          type: string
+        value:
+          minLength: 1
+          type: string
+      required:
+      - appId
+      - key
+      - storeName
+      - value
+      type: object
+    CreatePersonalAccessTokenCommand:
+      additionalProperties: false
+      example:
+        name: name
+      properties:
+        name:
+          minLength: 1
+          type: string
+      required:
+      - name
+      type: object
+    CreateSqlDatabaseCommand:
+      additionalProperties: false
+      example:
+        appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+      properties:
+        name:
+          minLength: 1
+          type: string
+        appId:
+          format: uuid
+          nullable: true
+          type: string
+      required:
+      - name
+      type: object
+    CreateSupportTicketCommand:
+      additionalProperties: false
+      example:
+        details: details
+        category: null
+      properties:
+        category:
+          $ref: '#/components/schemas/TicketCategory'
+        details:
+          type: string
+      required:
+      - category
+      type: object
+    CreateTokenCommand:
+      additionalProperties: false
+      example:
+        providerCode: providerCode
+        clientId: clientId
+        isMarketingEmailOn: true
+        provider: null
+      properties:
+        providerCode:
+          type: string
+        clientId:
+          type: string
+        provider:
+          $ref: '#/components/schemas/AccountProvider'
+        isMarketingEmailOn:
+          type: boolean
+      type: object
+    CreateVariablePairCommand:
+      additionalProperties: false
+      example:
+        appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        variable: variable
+        value: value
+      properties:
+        appId:
+          format: uuid
+          type: string
+        variable:
+          minLength: 1
+          type: string
+        value:
+          minLength: 1
+          type: string
+      required:
+      - appId
+      - value
+      - variable
+      type: object
+    Database:
+      additionalProperties: false
+      example:
+        default: true
+        name: name
+      properties:
+        name:
+          minLength: 1
+          type: string
+        default:
+          type: boolean
+      required:
+      - default
+      - name
+      type: object
+    DatabasesList:
+      additionalProperties: false
+      example:
+        databases:
+        - default: true
+          name: name
+        - default: true
+          name: name
+      properties:
+        databases:
+          items:
+            $ref: '#/components/schemas/Database'
+          type: array
+      required:
+      - databases
+      type: object
+    DeleteSqlDatabaseCommand:
+      additionalProperties: false
+      example:
+        name: name
+      properties:
+        name:
+          minLength: 1
+          type: string
+      required:
+      - name
+      type: object
+    DeleteVariablePairCommand:
+      additionalProperties: false
+      example:
+        appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        variable: variable
+      properties:
+        appId:
+          format: uuid
+          type: string
+        variable:
+          minLength: 1
+          type: string
+      required:
+      - appId
+      - variable
+      type: object
+    DesiredStatus:
+      enum:
+      - Running
+      - Dead
+      type: string
+    DeviceCodeDetails:
+      additionalProperties: false
+      example:
+        clientName: clientName
+      properties:
+        clientName:
+          type: string
+      type: object
+    DeviceCodeItem:
+      additionalProperties: false
+      example:
+        expiresIn: 0
+        interval: 6
+        deviceCode: deviceCode
+        verificationUrl: verificationUrl
+        userCode: userCode
+      properties:
+        deviceCode:
+          minLength: 1
+          type: string
+        userCode:
+          minLength: 1
+          type: string
+        verificationUrl:
+          minLength: 1
+          type: string
+        expiresIn:
+          format: int64
+          type: integer
+        interval:
+          format: int32
+          type: integer
+      required:
+      - deviceCode
+      - expiresIn
+      - interval
+      - userCode
+      - verificationUrl
+      type: object
+    DnsRecord:
+      additionalProperties: false
+      example:
+        name: name
+        type: type
+        value: value
+        ttl: 0
+      properties:
+        type:
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+        value:
+          minLength: 1
+          type: string
+        ttl:
+          format: int32
+          type: integer
+      required:
+      - name
+      - ttl
+      - type
+      - value
+      type: object
+    DomainItem:
+      additionalProperties: false
+      example:
+        dnsRecords:
+        - name: name
+          type: type
+          value: value
+          ttl: 0
+        - name: name
+          type: type
+          value: value
+          ttl: 0
+        name: name
+        validationStatus: validationStatus
+        validatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        name:
+          minLength: 1
+          type: string
+        validationStatus:
+          minLength: 1
+          type: string
+        validatedAt:
+          format: date-time
+          nullable: true
+          type: string
+        dnsRecords:
+          items:
+            $ref: '#/components/schemas/DnsRecord'
+          type: array
+      required:
+      - dnsRecords
+      - name
+      - validationStatus
+      type: object
+    DomainValidationStatus:
+      enum:
+      - InProgress
+      - Ready
+      type: string
+    EnvironmentVariableItem:
+      additionalProperties: false
+      example:
+        value: value
+        channelId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        key: key
+      properties:
+        channelId:
+          format: uuid
+          type: string
+        key:
+          minLength: 1
+          type: string
+        value:
+          minLength: 1
+          type: string
+      required:
+      - channelId
+      - key
+      - value
+      type: object
+    ExecuteSqlStatementCommand:
+      additionalProperties: false
+      example:
+        database: database
+        default: true
+        statement: statement
+      properties:
+        database:
+          minLength: 1
+          type: string
+        default:
+          type: boolean
+        statement:
+          minLength: 1
+          type: string
+      required:
+      - database
+      - default
+      - statement
+      type: object
+    GetChannelLogsVm:
+      additionalProperties: false
+      example:
+        logs:
+        - logs
+        - logs
+      properties:
+        logs:
+          items:
+            type: string
+          type: array
+      required:
+      - logs
+      type: object
+    GetSqlDatabasesQuery:
+      additionalProperties: false
+      example:
+        appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        appId:
+          format: uuid
+          nullable: true
+          type: string
+      type: object
+    GetVariablesQuery:
+      additionalProperties: false
+      example:
+        appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        appId:
+          format: uuid
+          type: string
+      required:
+      - appId
+      type: object
+    GuidNullableField:
+      additionalProperties: false
+      example:
+        value: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        value:
+          format: uuid
+          nullable: true
+          type: string
+      type: object
+    HealthCheckResult:
+      additionalProperties: false
+      example:
+        status: null
+      properties:
+        status:
+          $ref: '#/components/schemas/ApiHealthStatus'
+      type: object
+    PatchAccountDetailsCommand:
+      additionalProperties: false
+      example:
+        isMarketingEmailOn:
+          value: true
+      properties:
+        isMarketingEmailOn:
+          $ref: '#/components/schemas/BooleanField'
+      type: object
+    PatchAppCommand:
+      additionalProperties: false
+      example:
+        domain:
+          value: value
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          type: string
+        domain:
+          $ref: '#/components/schemas/StringField'
+      required:
+      - id
+      type: object
+    PatchChannelCommand:
+      additionalProperties: false
+      example:
+        domain:
+          value: value
+        name:
+          value: value
+        revisionSelectionStrategy:
+          value: null
+        rangeRule:
+          value: value
+        activeRevisionId:
+          value: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        channelId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        channelId:
+          format: uuid
+          type: string
+        name:
+          $ref: '#/components/schemas/StringField'
+        domain:
+          $ref: '#/components/schemas/StringField'
+        revisionSelectionStrategy:
+          $ref: '#/components/schemas/ChannelRevisionSelectionStrategyField'
+        rangeRule:
+          $ref: '#/components/schemas/StringField'
+        activeRevisionId:
+          $ref: '#/components/schemas/GuidNullableField'
+      type: object
+    PaymentIntegrationUrl:
+      additionalProperties: false
+      example:
+        url: url
+      properties:
+        url:
+          type: string
+      type: object
+    PersonalAccessTokenItem:
+      additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    PersonalAccessTokenItemPage:
+      additionalProperties: false
+      example:
+        totalItems: 0
+        pageIndex: 6
+        isLastPage: true
+        pageSize: 1
+        items:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PersonalAccessTokenItem'
+          type: array
+        totalItems:
+          format: int32
+          type: integer
+        pageIndex:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        isLastPage:
+          readOnly: true
+          type: boolean
+      required:
+      - isLastPage
+      - items
+      - pageIndex
+      - pageSize
+      - totalItems
+      type: object
+    PersonalAccessTokenValue:
+      additionalProperties: false
+      example:
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        token: token
+      properties:
+        name:
+          type: string
+        token:
+          type: string
+        id:
+          format: uuid
+          type: string
+      type: object
+    Plan:
+      additionalProperties: false
+      example:
+        price: 0.8008281904610115
+        accountPlanType: null
+      properties:
+        accountPlanType:
+          $ref: '#/components/schemas/AccountPlanType'
+        price:
+          format: double
+          nullable: true
+          type: number
+      type: object
+    RefreshTokenCommand:
+      additionalProperties: false
+      example:
+        token: token
+        refreshToken: refreshToken
+      properties:
+        token:
+          minLength: 1
+          type: string
+        refreshToken:
+          minLength: 1
+          type: string
+      required:
+      - refreshToken
+      - token
+      type: object
+    RegisterRevisionCommand:
+      additionalProperties: false
+      example:
+        revisionNumber: revisionNumber
+        appStorageId: appStorageId
+      properties:
+        appStorageId:
+          minLength: 1
+          type: string
+        revisionNumber:
+          minLength: 1
+          type: string
+      required:
+      - appStorageId
+      - revisionNumber
+      type: object
+    RevisionComponentDto:
+      additionalProperties: false
+      example:
+        route: route
+        name: name
+        channel: channel
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source: source
+        type: type
+      properties:
+        id:
+          format: uuid
+          type: string
+        source:
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+        route:
+          nullable: true
+          type: string
+        channel:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+      required:
+      - id
+      - name
+      - source
+      type: object
+    RevisionItem:
+      additionalProperties: false
+      example:
+        components:
+        - route: route
+          name: name
+          channel: channel
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source: source
+          type: type
+        - route: route
+          name: name
+          channel: channel
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source: source
+          type: type
+        revisionNumber: revisionNumber
+        appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: type
+      properties:
+        id:
+          format: uuid
+          type: string
+        appId:
+          format: uuid
+          type: string
+        revisionNumber:
+          minLength: 1
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/RevisionComponentDto'
+          readOnly: true
+          type: array
+        type:
+          nullable: true
+          type: string
+      required:
+      - appId
+      - components
+      - id
+      - revisionNumber
+      type: object
+    RevisionItemPage:
+      additionalProperties: false
+      example:
+        totalItems: 0
+        pageIndex: 6
+        isLastPage: true
+        pageSize: 1
+        items:
+        - components:
+          - route: route
+            name: name
+            channel: channel
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            source: source
+            type: type
+          - route: route
+            name: name
+            channel: channel
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            source: source
+            type: type
+          revisionNumber: revisionNumber
+          appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: type
+        - components:
+          - route: route
+            name: name
+            channel: channel
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            source: source
+            type: type
+          - route: route
+            name: name
+            channel: channel
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            source: source
+            type: type
+          revisionNumber: revisionNumber
+          appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: type
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/RevisionItem'
+          type: array
+        totalItems:
+          format: int32
+          type: integer
+        pageIndex:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        isLastPage:
+          readOnly: true
+          type: boolean
+      required:
+      - isLastPage
+      - items
+      - pageIndex
+      - pageSize
+      - totalItems
+      type: object
+    StringField:
+      additionalProperties: false
+      example:
+        value: value
+      properties:
+        value:
+          type: string
+      type: object
+    StringPage:
+      additionalProperties: false
+      example:
+        totalItems: 0
+        pageIndex: 6
+        isLastPage: true
+        pageSize: 1
+        items:
+        - items
+        - items
+      properties:
+        items:
+          items:
+            type: string
+          type: array
+        totalItems:
+          format: int32
+          type: integer
+        pageIndex:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        isLastPage:
+          readOnly: true
+          type: boolean
+      required:
+      - isLastPage
+      - items
+      - pageIndex
+      - pageSize
+      - totalItems
+      type: object
+    TicketCategory:
+      enum:
+      - TechnicalHelp
+      - BillingHelp
+      - SomethingElse
+      type: string
+    TokenInfo:
+      additionalProperties: false
+      example:
+        expiration: 2000-01-23T04:56:07.000+00:00
+        token: token
+        refreshToken: refreshToken
+      properties:
+        token:
+          minLength: 1
+          type: string
+        refreshToken:
+          minLength: 1
+          type: string
+        expiration:
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - expiration
+      - refreshToken
+      - token
+      type: object
+    UpdateAppCommand:
+      additionalProperties: false
+      example:
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          minLength: 1
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    UpdateChannelCommand:
+      additionalProperties: false
+      example:
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        revisionSelectionStrategy: null
+        rangeRule: rangeRule
+        activeRevisionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          minLength: 1
+          type: string
+        revisionSelectionStrategy:
+          $ref: '#/components/schemas/ChannelRevisionSelectionStrategy'
+        rangeRule:
+          nullable: true
+          type: string
+        activeRevisionId:
+          format: uuid
+          nullable: true
+          type: string
+      required:
+      - id
+      - name
+      - revisionSelectionStrategy
+      type: object
+    UpdateDesiredStatusCommand:
+      additionalProperties: false
+      example:
+        channelId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        desiredStatus: null
+      properties:
+        channelId:
+          format: uuid
+          type: string
+        desiredStatus:
+          $ref: '#/components/schemas/DesiredStatus'
+      required:
+      - channelId
+      - desiredStatus
+      type: object
+    VariablesList:
+      additionalProperties: false
+      example:
+        vars:
+        - vars
+        - vars
+      properties:
+        vars:
+          items:
+            type: string
+          type: array
+      required:
+      - vars
+      type: object
+  securitySchemes:
+    Bearer:
+      description: "JWT Authorization header using the Bearer scheme. Example: \"\
+        Authorization: Bearer {token}\""
+      in: header
+      name: Authorization
+      type: apiKey
